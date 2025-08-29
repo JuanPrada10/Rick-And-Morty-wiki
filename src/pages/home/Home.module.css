@@ -1,0 +1,16 @@
+.container {
+  position: relative;
+  background-image: url("../../assets/background/green-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+.container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
