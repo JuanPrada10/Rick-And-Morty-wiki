@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export const usePaginated = () => {
-  const [page, setPage] = useState(42);
+  const [page, setPage] = useState(1);
   const handleNext = () => {
     setPage(page + 1);
   };

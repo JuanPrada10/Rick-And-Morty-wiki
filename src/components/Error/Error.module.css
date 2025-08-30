@@ -1,0 +1,16 @@
+.error {
+  color: aliceblue;
+  width: 100%;
+  height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  img {
+    width: 300px;
+  }
+  h1 {
+    text-shadow: 0 0 10px #77d836;
+  }
+}

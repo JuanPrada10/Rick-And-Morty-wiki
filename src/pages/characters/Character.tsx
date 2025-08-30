@@ -1,10 +1,14 @@
 import styles from "./character.module.css";
-import { useFetch, usePaginated } from "../../hooks";
-import imgError from "../../assets/Error/Error-rick-and-morty.png";
-import { Card, Button, SearchInput } from "../../components";
-import { useEffect, useState } from "react";
-import { RingLoader } from "react-spinners";
+import { useFetch, usePaginated, useSearch } from "../../hooks";
+import {
+  Card,
+  Button,
+  SearchInput,
+  ErrorComponent,
+  Loading,
+} from "../../components";
 import type { Info } from "../../Types/apiTypes";
+
 interface Character {
   id: number;
   name: string;
@@ -20,42 +24,28 @@ interface ApiResponse {
 }
 
 const Character = () => {
-  const [search, setSearch] = useState("");
-  const [debouncedSearch, setDebouncedSearch] = useState(search);
-  const { handleNext, handlePrev, page, setPage } = usePaginated();
+  const { onChange, search, debouncedSearch } = useSearch();
+  const { handleNext, handlePrev, page } = usePaginated();
   const url = `https://rickandmortyapi.com/api/character/?page=${page}&name=${debouncedSearch}`;
   const { data, loading, error } = useFetch<ApiResponse>(url);
 
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedSearch(search);
-    }, 500);
-
-    return () => clearTimeout(handler);
-  }, [search]);
-
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-    setPage(1);
-  };
   return (
     <>
+      {/* Search Input */}
+
       <div className={styles.search}>
-        <SearchInput value={search} onChange={handleOnChange}></SearchInput>
+        <SearchInput value={search} onChange={onChange}></SearchInput>
       </div>
-      {error && (
-        <div className={styles.error}>
-          <img src={imgError} alt="error-Rick" />
-          <h1>¡Wubba Lubba Dub Dub! No encontramos nada</h1>
-          <br />
-          <p>Error : {error.message}</p>
-        </div>
-      )}
-      {loading && (
-        <div className={styles.loading}>
-          <RingLoader color="#68ec3c" size={128} />
-        </div>
-      )}
+
+      {/* Error */}
+
+      {error && <ErrorComponent error={error} />}
+      {/* Loading */}
+
+      {loading && <Loading />}
+
+      {/*Renderizado Normal*/}
+
       {data && (
         <>
           <div className={styles.container}>
