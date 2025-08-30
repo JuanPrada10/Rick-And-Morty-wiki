@@ -1,9 +1,10 @@
 import styles from "./character.module.css";
-import { useFetch } from "../../hooks";
+import { useFetch, usePaginated } from "../../hooks";
 import imgError from "../../assets/Error/Error-rick-and-morty.png";
 import { Card, Button, SearchInput } from "../../components";
 import { useEffect, useState } from "react";
 import { RingLoader } from "react-spinners";
+import type { Info } from "../../Types/apiTypes";
 interface Character {
   id: number;
   name: string;
@@ -12,12 +13,6 @@ interface Character {
   gender: string;
   image: string;
 }
-interface Info {
-  count: number;
-  pages: number;
-  next: string;
-  prev: string | null;
-}
 
 interface ApiResponse {
   results: Character[];
@@ -25,9 +20,9 @@ interface ApiResponse {
 }
 
 const Character = () => {
-  const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState(search);
+  const { handleNext, handlePrev, page, setPage } = usePaginated();
   const url = `https://rickandmortyapi.com/api/character/?page=${page}&name=${debouncedSearch}`;
   const { data, loading, error } = useFetch<ApiResponse>(url);
 
@@ -39,16 +34,6 @@ const Character = () => {
     return () => clearTimeout(handler);
   }, [search]);
 
-  const handleNext = () => {
-    if (page) {
-      setPage(page + 1);
-    }
-  };
-  const handlePrev = () => {
-    if (page) {
-      setPage(page - 1);
-    }
-  };
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
     setPage(1);
@@ -87,7 +72,7 @@ const Character = () => {
               Prev
             </Button>
             <div className={styles.page}>{page}</div>
-            <Button disabled={!data?.info.next} handleClick={handleNext}>
+            <Button disabled={!data.info.next} handleClick={handleNext}>
               Next
             </Button>
           </div>
