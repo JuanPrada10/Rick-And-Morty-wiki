@@ -1,9 +1,12 @@
-import { useState } from "react";
-import { Button, Card } from "../../components";
-import { useFetch } from "../../hooks";
+import type { Info } from "../../Types/apiTypes";
+import { ErrorComponent, Loading, GroupPagination } from "../../components";
+import EpisodeCard from "../../components/EpisodeCard/EpisodeCard";
+import { useFetch, usePaginated } from "../../hooks";
 import styles from "./episode.module.css";
+
 interface ApiResponse {
   results: Episode[];
+  info: Info;
 }
 type Episode = {
   id: number;
@@ -13,37 +16,46 @@ type Episode = {
 };
 
 const Episode = () => {
-  const [page, setPage] = useState(1);
+  const { handleNext, handlePrev, page } = usePaginated();
   const url = `https://rickandmortyapi.com/api/episode/?page=${page}`;
   const { data, loading, error } = useFetch<ApiResponse>(url);
 
-  const handleNext = () => {
-    if (page) {
-      setPage(page + 1);
-    }
-  };
-  const handlePrev = () => {
-    if (page) {
-      setPage(page - 1);
-    }
-  };
   return (
     <>
-      <div className={styles.container}>
-        {error && <div>Error : {error.message}</div>}
-        {loading && <div>Cargando....</div>}
-        {data?.results?.map((episode: Episode) => (
-          <Card key={episode.id} name={episode.name} />
-        ))}
-      </div>
-      <div className={styles.page}>
-        <Button disabled={page === 1} handleClick={handlePrev}>
-          Prev
-        </Button>
-        <Button disabled={!data?.info.next} handleClick={handleNext}>
-          Next
-        </Button>
-      </div>
+      {/*Error */}
+
+      {error && <ErrorComponent error={error} />}
+
+      {/*Loading */}
+
+      {loading && <Loading />}
+
+      {/*Episodes */}
+
+      {data && (
+        <>
+          <div className={styles.container}>
+            {data?.results?.map((episode: Episode) => {
+              return (
+                <EpisodeCard
+                  key={episode.id}
+                  name={episode.name}
+                  date={episode.airDate}
+                  episode={episode.episode}
+                />
+              );
+            })}
+          </div>
+          {/*Pagination */}
+
+          <GroupPagination
+            page={page}
+            handleNext={handleNext}
+            handlePrev={handlePrev}
+            next={data.info.next}
+          />
+        </>
+      )}
     </>
   );
 };

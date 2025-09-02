@@ -2,7 +2,7 @@ import styles from "./character.module.css";
 import { useFetch, usePaginated, useSearch } from "../../hooks";
 import {
   Card,
-  Button,
+  GroupPagination,
   SearchInput,
   ErrorComponent,
   Loading,
@@ -57,15 +57,13 @@ const Character = () => {
               />
             ))}
           </div>
-          <div className={styles.pagination}>
-            <Button disabled={page === 1} handleClick={handlePrev}>
-              Prev
-            </Button>
-            <div className={styles.page}>{page}</div>
-            <Button disabled={!data.info.next} handleClick={handleNext}>
-              Next
-            </Button>
-          </div>
+          {/*Buttons for Pagination */}
+          <GroupPagination
+            page={page}
+            handleNext={handleNext}
+            handlePrev={handlePrev}
+            next={data.info.next}
+          />
         </>
       )}
     </>

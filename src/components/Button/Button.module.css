@@ -1,8 +1,8 @@
 .button {
-  color: #68ec3c;
-  background-color: #178ea3;
+  color: rgb(26, 255, 45);
+  background-color: #219db3;
   border-radius: 5px;
-  border: 2px solid #68ec3c;
+  border: 2px solid rgb(26, 255, 45);
   max-width: 100px;
   padding: 0.2rem 1rem;
   font-weight: bold;

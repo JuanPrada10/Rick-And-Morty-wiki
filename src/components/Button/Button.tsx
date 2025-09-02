@@ -3,7 +3,7 @@ import styles from "./Button.module.css";
 
 interface Props {
   children: React.ReactNode;
-  handleClick: () => void;
+  handleClick?: () => void;
   disabled?: boolean;
 }
 const Button = ({ children, handleClick, disabled }: Props) => {
