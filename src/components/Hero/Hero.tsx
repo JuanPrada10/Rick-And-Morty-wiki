@@ -1,5 +1,5 @@
 import HeroImg from "../../assets/logos/pngegg.png";
-import style from "./hero.module.css";
+import style from "./Hero.module.css";
 import gsap from "gsap";
 import TextPlugin from "gsap/TextPlugin";
 import { useGSAP } from "@gsap/react";
