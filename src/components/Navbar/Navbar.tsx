@@ -1,4 +1,4 @@
-import style from "./Navbar.module.css";
+import style from "./navbar.module.css";
 import Logo from "../../assets/logos/logo-rick.png";
 import { NavLink } from "react-router";
 import gsap from "gsap";
