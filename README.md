@@ -69,5 +69,5 @@ export default tseslint.config([
   },
 ]);
 ```
-```bash
+## 🚀 Link 
   https://rick-and-morty-test1.netlify.app/
