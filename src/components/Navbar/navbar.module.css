@@ -12,13 +12,14 @@
   display: flex;
   gap: 32px;
   list-style: none;
-  li a {
+  .link {
     font-size: 1.2rem;
     text-decoration: none;
     color: white;
-  }
-  li :hover {
     transition: all 0.5s;
+  }
+  .link:hover,
+  .active {
     color: #77d836;
     text-shadow: 0 0 10px #77d836;
   }

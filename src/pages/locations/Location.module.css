@@ -1,0 +1,28 @@
+.container {
+  color: white;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(470px, 1fr));
+  gap: 10px;
+  padding: 20px;
+  justify-items: center;
+}
+.data {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 500px;
+}
+.data p {
+  padding: 10px 0;
+  span {
+    color: rgb(26, 255, 45);
+  }
+}
+.image {
+  img {
+    border-radius: 100%;
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+  }
+}

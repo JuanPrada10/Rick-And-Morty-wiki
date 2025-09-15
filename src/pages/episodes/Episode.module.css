@@ -5,4 +5,33 @@
   gap: 10px;
   padding: 20px;
   justify-items: center;
+  img {
+    border-radius: 100%;
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+  }
+  span {
+    color: rgb(26, 255, 45);
+  }
+}
+
+.text {
+  width: 200px;
+}
+.text p {
+  padding: 10px 0;
+  font-size: large;
+  font-weight: 500;
+}
+.circle {
+  width: 10px;
+  height: 10px;
+  background-color: aqua;
+  border-radius: 100%;
+}
+.season {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
