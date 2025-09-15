@@ -7,7 +7,7 @@ import {
 } from "../../components";
 import EpisodeCard from "../../components/EpisodeCard/EpisodeCard";
 import { useFetch, usePaginated } from "../../hooks";
-import styles from "./episode.module.css";
+import styles from "./Episode.module.css";
 import img from "../../assets/logos/rick-Episode.jpg";
 
 interface ApiResponse {
