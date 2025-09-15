@@ -1,4 +1,4 @@
-import styles from "./character.module.css";
+import styles from "./Character.module.css";
 import { useFetch, usePaginated, useSearch } from "../../hooks";
 import {
   Card,
